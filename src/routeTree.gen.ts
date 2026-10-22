@@ -10,33 +10,53 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as NyRouteImport } from './routes/ny'
+import { Route as OppgaverRouteImport } from './routes/oppgaver'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const NyRoute = NyRouteImport.update({
+  id: '/ny',
+  path: '/ny',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OppgaverRoute = OppgaverRouteImport.update({
+  id: '/oppgaver',
+  path: '/oppgaver',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/ny': typeof NyRoute
+  '/oppgaver': typeof OppgaverRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/ny': typeof NyRoute
+  '/oppgaver': typeof OppgaverRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/ny': typeof NyRoute
+  '/oppgaver': typeof OppgaverRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/ny' | '/oppgaver'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/ny' | '/oppgaver'
+  id: '__root__' | '/' | '/ny' | '/oppgaver'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  NyRoute: typeof NyRoute
+  OppgaverRoute: typeof OppgaverRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +68,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ny': {
+      id: '/ny'
+      path: '/ny'
+      fullPath: '/ny'
+      preLoaderRoute: typeof NyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/oppgaver': {
+      id: '/oppgaver'
+      path: '/oppgaver'
+      fullPath: '/oppgaver'
+      preLoaderRoute: typeof OppgaverRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  NyRoute: NyRoute,
+  OppgaverRoute: OppgaverRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
