@@ -12,8 +12,9 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import { LayoutDashboard, ListTodo, PlusCircle, Sparkles } from "lucide-react";
+import { Gem, LayoutDashboard, ListTodo, PlusCircle, Sparkles } from "lucide-react";
 import { Toaster } from "@/components/ui/sonner";
+import { RewardModal } from "@/components/RewardModal";
 
 function NotFoundComponent() {
   return (
@@ -119,6 +120,7 @@ const NAV = [
   { to: "/", label: "Dashbord", icon: LayoutDashboard },
   { to: "/oppgaver", label: "Mine oppgaver", icon: ListTodo },
   { to: "/ny", label: "Ny oppgave", icon: PlusCircle },
+  { to: "/samling", label: "Samlingen min", icon: Gem },
 ] as const;
 
 function RootComponent() {
@@ -141,17 +143,21 @@ function RootComponent() {
           </nav>
         </div>
       </header>
-      <main className="mx-auto max-w-3xl px-4 pb-28 pt-6 sm:pb-10">
+      <main className="mx-auto max-w-3xl px-4 pt-6">
         <Outlet />
       </main>
-      <nav className="fixed inset-x-0 bottom-0 z-10 grid grid-cols-3 border-t border-border bg-card sm:hidden">
+      <footer className="mx-auto max-w-3xl px-4 pb-28 pt-8 text-center text-xs text-muted-foreground sm:pb-8">
+        Uoffisielt studentprosjekt, ingen tilknytning til parfymemerkene eller Monster Energy.
+      </footer>
+      <nav className="fixed inset-x-0 bottom-0 z-10 grid grid-cols-4 border-t border-border bg-card sm:hidden">
         {NAV.map((n) => (
-          <Link key={n.to} to={n.to} activeOptions={{ exact: true }} className="flex flex-col items-center gap-0.5 py-2.5 text-xs font-semibold text-muted-foreground" activeProps={{ className: "text-primary" }}>
+          <Link key={n.to} to={n.to} activeOptions={{ exact: true }} className="flex flex-col items-center gap-0.5 py-2.5 text-[11px] font-semibold text-muted-foreground" activeProps={{ className: "text-primary" }}>
             <n.icon className="size-5" />
             {n.label}
           </Link>
         ))}
       </nav>
+      <RewardModal />
       <Toaster position="top-center" />
     </QueryClientProvider>
   );
