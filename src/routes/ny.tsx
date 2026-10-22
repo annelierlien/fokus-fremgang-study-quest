@@ -26,7 +26,10 @@ function AddTask() {
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!subject.trim() || !title.trim() || !deadline) return toast.error("Fyll ut alle feltene");
+    if (!subject.trim() || !title.trim() || !deadline) {
+      toast.error("Fyll ut alle feltene");
+      return;
+    }
     taskActions.add({ subject: subject.trim(), title: title.trim(), deadline });
     toast.success("Oppgave lagt til!");
     navigate({ to: "/oppgaver" });

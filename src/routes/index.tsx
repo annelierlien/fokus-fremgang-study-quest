@@ -29,7 +29,7 @@ function Dashboard() {
   const doneThisWeek = tasks.filter((t) => t.done && t.completedAt && week.includes(t.completedAt)).length;
   const perDay = week.map((d) => tasks.filter((t) => t.done && t.completedAt === d).length);
   const max = Math.max(1, ...perDay);
-  const weekTasks = sortByDeadline(tasks.filter((t) => week.includes(t.deadline) || (!t.done && t.deadline < week[0])));
+  const weekTasks = sortByDeadline(tasks.filter((t) => week.includes(t.deadline) || (!t.done && t.deadline < (week[0] ?? ""))));
 
   return (
     <div className="space-y-6">
