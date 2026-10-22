@@ -169,6 +169,6 @@
 @utility card-hero {
   color: var(--primary-foreground);
   border-radius: calc(var(--radius) + 12px);
-  background: linear-gradient(135deg, var(--primary), var(--primary-glow));
+  background: linear-gradient(135deg, var(--primary) 0%, color-mix(in oklab, var(--primary) 42%, var(--primary-glow)) 52%, var(--primary-glow) 100%);
   box-shadow: var(--shadow-glow);
 }
