@@ -14,7 +14,3 @@ export function Bottle({ rarity, missing, size = 56 }: { rarity?: Rarity; missin
     </div>
   );
 }
-
-export function Can({ size = 56 }: { size?: number }) {
-  return <div className="monster-can" style={{ width: size * 0.62, height: size * 1.2 }} />;
-}

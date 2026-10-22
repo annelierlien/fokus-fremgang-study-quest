@@ -1,7 +1,7 @@
 import { useSyncExternalStore } from "react";
 
 const KEY = "studyquest.rewards.v1";
-export type Collection = { claimedLevel: number | null; perfumes: string[]; monsters: string[] };
+export type Collection = { claimedLevel: number | null; perfumes: string[] };
 let cache: Collection | null = null;
 const listeners = new Set<() => void>();
 
@@ -9,9 +9,9 @@ function load(): Collection {
   if (cache) return cache;
   try {
     const raw = localStorage.getItem(KEY);
-    cache = raw ? (JSON.parse(raw) as Collection) : { claimedLevel: null, perfumes: [], monsters: [] };
+    cache = raw ? (JSON.parse(raw) as Collection) : { claimedLevel: null, perfumes: [] };
   } catch {
-    cache = { claimedLevel: null, perfumes: [], monsters: [] };
+    cache = { claimedLevel: null, perfumes: [] };
   }
   return cache;
 }
@@ -37,12 +37,11 @@ export const collectionActions = {
     const c = load();
     if (c.claimedLevel === null) save({ ...c, claimedLevel: level });
   },
-  claim(reward: { kind: "perfume" | "monster"; name: string }) {
+  claim(reward: { name: string }) {
     const c = load();
     save({
       claimedLevel: (c.claimedLevel ?? 1) + 1,
-      perfumes: reward.kind === "perfume" && !c.perfumes.includes(reward.name) ? [...c.perfumes, reward.name] : c.perfumes,
-      monsters: reward.kind === "monster" ? [...c.monsters, reward.name] : c.monsters,
+      perfumes: !c.perfumes.includes(reward.name) ? [...c.perfumes, reward.name] : c.perfumes,
     });
   },
 };
