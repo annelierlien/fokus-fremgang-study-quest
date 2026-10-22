@@ -44,7 +44,7 @@ function Dashboard() {
           </div>
         </div>
         <div className="mt-5">
-          <div className="mb-1 flex justify-between text-sm opacity-90">
+          <div className="mb-1 flex justify-between text-sm font-semibold">
             <span>{xp % XP_PER_LEVEL} / {XP_PER_LEVEL} XP</span>
             <span>til nivå {level + 1}</span>
           </div>
