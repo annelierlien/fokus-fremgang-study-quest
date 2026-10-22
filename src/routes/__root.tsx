@@ -12,6 +12,8 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { LayoutDashboard, ListTodo, PlusCircle, Sparkles } from "lucide-react";
+import { Toaster } from "@/components/ui/sonner";
 
 function NotFoundComponent() {
   return (
@@ -78,21 +80,19 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "StudyQuest" },
+      { name: "description", content: "Gamifisert studieplanlegger for studenter." },
+      { property: "og:title", content: "StudyQuest" },
+      { property: "og:description", content: "Gamifisert studieplanlegger for studenter." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
+      { rel: "stylesheet", href: appCss },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=Figtree:wght@400;500;600;700&display=swap" },
     ],
   }),
   shellComponent: RootShell,
@@ -103,7 +103,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="nb">
       <head>
         <HeadContent />
       </head>
@@ -115,13 +115,44 @@ function RootShell({ children }: { children: ReactNode }) {
   );
 }
 
+const NAV = [
+  { to: "/", label: "Dashbord", icon: LayoutDashboard },
+  { to: "/oppgaver", label: "Mine oppgaver", icon: ListTodo },
+  { to: "/ny", label: "Ny oppgave", icon: PlusCircle },
+] as const;
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <header className="sticky top-0 z-10 border-b border-border bg-background/85 backdrop-blur">
+        <div className="mx-auto flex max-w-3xl items-center justify-between px-4 py-3">
+          <Link to="/" className="flex items-center gap-2 font-display text-xl font-extrabold">
+            <span className="grid size-8 place-items-center rounded-xl bg-primary text-primary-foreground"><Sparkles className="size-4" /></span>
+            StudyQuest
+          </Link>
+          <nav className="hidden gap-1 sm:flex">
+            {NAV.map((n) => (
+              <Link key={n.to} to={n.to} activeOptions={{ exact: true }} className="rounded-full px-3 py-1.5 text-sm font-semibold text-muted-foreground" activeProps={{ className: "bg-accent text-accent-foreground" }}>
+                {n.label}
+              </Link>
+            ))}
+          </nav>
+        </div>
+      </header>
+      <main className="mx-auto max-w-3xl px-4 pb-28 pt-6 sm:pb-10">
+        <Outlet />
+      </main>
+      <nav className="fixed inset-x-0 bottom-0 z-10 grid grid-cols-3 border-t border-border bg-card sm:hidden">
+        {NAV.map((n) => (
+          <Link key={n.to} to={n.to} activeOptions={{ exact: true }} className="flex flex-col items-center gap-0.5 py-2.5 text-xs font-semibold text-muted-foreground" activeProps={{ className: "text-primary" }}>
+            <n.icon className="size-5" />
+            {n.label}
+          </Link>
+        ))}
+      </nav>
+      <Toaster position="top-center" />
     </QueryClientProvider>
   );
 }
