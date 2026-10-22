@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as NyRouteImport } from './routes/ny'
 import { Route as OppgaverRouteImport } from './routes/oppgaver'
+import { Route as SamlingRouteImport } from './routes/samling'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -28,35 +29,44 @@ const OppgaverRoute = OppgaverRouteImport.update({
   path: '/oppgaver',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SamlingRoute = SamlingRouteImport.update({
+  id: '/samling',
+  path: '/samling',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/ny': typeof NyRoute
   '/oppgaver': typeof OppgaverRoute
+  '/samling': typeof SamlingRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/ny': typeof NyRoute
   '/oppgaver': typeof OppgaverRoute
+  '/samling': typeof SamlingRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/ny': typeof NyRoute
   '/oppgaver': typeof OppgaverRoute
+  '/samling': typeof SamlingRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/ny' | '/oppgaver'
+  fullPaths: '/' | '/ny' | '/oppgaver' | '/samling'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/ny' | '/oppgaver'
-  id: '__root__' | '/' | '/ny' | '/oppgaver'
+  to: '/' | '/ny' | '/oppgaver' | '/samling'
+  id: '__root__' | '/' | '/ny' | '/oppgaver' | '/samling'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   NyRoute: typeof NyRoute
   OppgaverRoute: typeof OppgaverRoute
+  SamlingRoute: typeof SamlingRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -82,6 +92,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OppgaverRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/samling': {
+      id: '/samling'
+      path: '/samling'
+      fullPath: '/samling'
+      preLoaderRoute: typeof SamlingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -89,6 +106,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   NyRoute: NyRoute,
   OppgaverRoute: OppgaverRoute,
+  SamlingRoute: SamlingRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
