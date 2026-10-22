@@ -29,7 +29,6 @@ function Samling() {
         <div className="mt-2 h-3 overflow-hidden rounded-full bg-muted">
           <div className="h-full rounded-full bg-primary transition-all" style={{ width: `${(count / ALL_PERFUMES.length) * 100}%` }} />
         </div>
-        {col.monsters.length > 0 && <p className="mt-3 text-sm text-muted-foreground">Monster Energy valgt: {col.monsters.length}</p>}
       </section>
 
       <section className="card-soft p-5">

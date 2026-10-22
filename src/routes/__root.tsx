@@ -147,7 +147,7 @@ function RootComponent() {
         <Outlet />
       </main>
       <footer className="mx-auto max-w-3xl px-4 pb-28 pt-8 text-center text-xs text-muted-foreground sm:pb-8">
-        Uoffisielt studentprosjekt, ingen tilknytning til parfymemerkene eller Monster Energy.
+        Uoffisielt studentprosjekt, ingen tilknytning til parfymemerkene.
       </footer>
       <nav className="fixed inset-x-0 bottom-0 z-10 grid grid-cols-4 border-t border-border bg-card sm:hidden">
         {NAV.map((n) => (

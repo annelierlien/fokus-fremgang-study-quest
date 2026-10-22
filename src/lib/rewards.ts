@@ -17,8 +17,6 @@ export const PERFUMES: Record<Rarity, string[]> = {
 
 export const ALL_PERFUMES = RARITIES.flatMap((rarity) => PERFUMES[rarity].map((name) => ({ name, rarity })));
 
-export const MONSTERS = ["Original", "Ultra White", "Mango Loco", "Pipeline Punch", "Ultra Gold", "Nitro", "Aussie Lemonade", "Bad Apple"];
-
 export const DROP_RATES: Record<Rarity, number> = { common: 55, rare: 25, mythic: 15, legendary: 5 };
 
 /** Mystery Box: +5 percentage points total for Rare or better, spread proportionally. */
@@ -55,19 +53,16 @@ export function rollPerfume(rates = DROP_RATES, rng: Rng = Math.random, exclude:
 
 export type Offer =
   | { kind: "perfume"; name: string; rarity: Rarity }
-  | { kind: "monster"; name: string }
   | { kind: "mystery" };
 
 export function rollOffer(rng: Rng = Math.random): Offer[] {
   const p1 = rollPerfume(DROP_RATES, rng);
   const p2 = rollPerfume(DROP_RATES, rng, [p1.name]);
-  const m1 = pick(MONSTERS, rng);
-  const m2 = pick(MONSTERS.filter((m) => m !== m1), rng);
+  const p3 = rollPerfume(DROP_RATES, rng, [p1.name, p2.name]);
   return [
     { kind: "perfume", ...p1 },
     { kind: "perfume", ...p2 },
-    { kind: "monster", name: m1 },
-    { kind: "monster", name: m2 },
+    { kind: "perfume", ...p3 },
     { kind: "mystery" },
   ];
 }

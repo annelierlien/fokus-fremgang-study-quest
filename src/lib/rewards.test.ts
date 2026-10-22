@@ -14,14 +14,12 @@ describe("rewards", () => {
     expect(m.common).toBe(50);
     expect(m.rare + m.mythic + m.legendary).toBeCloseTo(50);
   });
-  it("offer = 2 distinct perfumes, 2 distinct monsters, 1 mystery", () => {
+  it("offer = 3 distinct perfumes, 1 mystery", () => {
     for (let i = 0; i < 50; i++) {
       const o = rollOffer();
       const p = o.filter((x) => x.kind === "perfume");
-      const m = o.filter((x) => x.kind === "monster");
-      expect(o.length).toBe(5);
-      expect(new Set(p.map((x) => x.name)).size).toBe(2);
-      expect(new Set(m.map((x) => x.name)).size).toBe(2);
+      expect(o.length).toBe(4);
+      expect(new Set(p.map((x) => x.name)).size).toBe(3);
       expect(o.filter((x) => x.kind === "mystery").length).toBe(1);
     }
   });
