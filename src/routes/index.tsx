@@ -29,7 +29,7 @@ function Dashboard() {
   const doneThisWeek = tasks.filter((t) => t.done && t.completedAt && week.includes(t.completedAt)).length;
   const perDay = week.map((d) => tasks.filter((t) => t.done && t.completedAt === d).length);
   const max = Math.max(1, ...perDay);
-  const weekTasks = sortByDeadline(tasks.filter((t) => week.includes(t.deadline) || (!t.done && t.deadline < week[0])));
+  const weekTasks = sortByDeadline(tasks.filter((t) => week.includes(t.deadline) || (!t.done && t.deadline < (week[0] ?? ""))));
 
   return (
     <div className="space-y-6">
@@ -44,7 +44,7 @@ function Dashboard() {
           </div>
         </div>
         <div className="mt-5">
-          <div className="mb-1 flex justify-between text-sm opacity-90">
+          <div className="mb-1 flex justify-between text-sm font-semibold">
             <span>{xp % XP_PER_LEVEL} / {XP_PER_LEVEL} XP</span>
             <span>til nivå {level + 1}</span>
           </div>

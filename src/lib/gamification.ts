@@ -4,7 +4,7 @@ export type Task = {
   title: string;
   deadline: string; // YYYY-MM-DD
   done: boolean;
-  completedAt?: string; // YYYY-MM-DD
+  completedAt?: string | undefined; // YYYY-MM-DD
 };
 
 export const XP_PER_TASK = 100;
