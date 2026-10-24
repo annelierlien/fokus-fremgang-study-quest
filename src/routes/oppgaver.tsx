@@ -11,6 +11,8 @@ export const Route = createFileRoute("/oppgaver")({
       { name: "description", content: "Alle oppgavene dine sortert etter frist." },
       { property: "og:title", content: "Mine oppgaver – StudyQuest" },
       { property: "og:description", content: "Alle oppgavene dine sortert etter frist." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Tasks,
