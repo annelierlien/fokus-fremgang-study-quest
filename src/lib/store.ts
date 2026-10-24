@@ -12,7 +12,7 @@ function seed(): Task[] {
     { id: "d1", subject: "Diskret matte", title: "Øving 5: Grafteori", deadline: iso(2), done: false },
     { id: "d2", subject: "Java", title: "Oblig 3: Arv og grensesnitt", deadline: iso(5), done: false },
     { id: "d3", subject: "Web-applikasjoner", title: "Lag React-komponent for skjema", deadline: iso(1), done: false },
-    { id: "d4", subject: "Diskret matte", title: "Les kapittel 4: Induksjon", deadline: iso(-1), done: true, completedAt: iso(-1) },
+    { id: "d4", subject: "Diskret matte", title: "Les kapittel 4: Induksjon", deadline: iso(0), done: false },
     { id: "d5", subject: "Java", title: "Quiz: Unntakshåndtering", deadline: iso(8), done: false },
   ];
 }

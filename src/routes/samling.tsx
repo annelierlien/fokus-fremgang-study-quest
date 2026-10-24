@@ -10,6 +10,8 @@ export const Route = createFileRoute("/samling")({
       { name: "description", content: "Se parfymene du har samlet ved å gå opp i nivå i StudyQuest." },
       { property: "og:title", content: "Samlingen min – StudyQuest" },
       { property: "og:description", content: "Parfymehylla di i StudyQuest." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Samling,

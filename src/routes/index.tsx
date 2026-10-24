@@ -11,6 +11,8 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "Se XP, nivå, streak og ukens oppgaver i StudyQuest." },
       { property: "og:title", content: "Dashbord – StudyQuest" },
       { property: "og:description", content: "Gamifisert studieplanlegger for studenter." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Dashboard,

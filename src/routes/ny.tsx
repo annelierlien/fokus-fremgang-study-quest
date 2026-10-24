@@ -11,6 +11,8 @@ export const Route = createFileRoute("/ny")({
       { name: "description", content: "Legg til fag, oppgave og frist." },
       { property: "og:title", content: "Ny oppgave – StudyQuest" },
       { property: "og:description", content: "Legg til fag, oppgave og frist." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: AddTask,
